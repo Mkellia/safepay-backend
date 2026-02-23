@@ -9,12 +9,12 @@ const generateToken = (id) => {
 
 class UserService {
     async register(userData) {
-        const { name, phone, email, password } = userData;
+        const { name, phone, email, password, role } = userData;
         const userExists = await User.findOne({ where: { phone } });
         if (userExists) {
             throw new Error('User with this phone number already exists');
         }
-        const user = await User.create({ name, phone, email, password });
+        const user = await User.create({ name, phone, email, password, role });
         return {
             id: user.id,
             name: user.name,
