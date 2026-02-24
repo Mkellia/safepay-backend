@@ -1,8 +1,8 @@
 const { Dispute, Order, User } = require('../models');
 
 class DisputeService {
-    async openDispute(userId, disputeData) {
-        const { orderId, reason } = disputeData;
+    async openDispute(userId, orderId, reason) {
+        const order = await Order.findByPk(orderId);
         if (!order) throw new Error('Order not found');
 
         if (order.buyerId !== userId && order.sellerId !== userId) {

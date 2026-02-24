@@ -64,6 +64,15 @@ const deactivateMe = async (req, res, next) => {
     }
 };
 
+const listUsers = async (req, res, next) => {
+    try {
+        const users = await userService.getAllUsers();
+        res.status(200).json({ success: true, data: users });
+    } catch (error) {
+        res.status(400).json({ success: false, message: error.message });
+    }
+};
+
 const createUser = async (req, res, next) => {
     try {
         const user = await userService.register(req.body);
@@ -82,4 +91,5 @@ module.exports = {
     updateUser,
     deactivateMe,
     createUser,
+    listUsers,
 };
